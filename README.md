@@ -3,14 +3,9 @@ Schedulr is a CRUD web-app that is based on PHP. The following documentation wil
 
 
 ## config.php
+Connecting to the database.
 ```php
 <?php
-
-/**
- * Configuration for database connection
- *
- */
-
 $host       = "localhost";
 $username   = "u226247330_rulr";
 $password   = ">M]2jpFi3";
@@ -22,11 +17,10 @@ $options    = array(
 
 ```
 ## common.php
+
 ```php
 
 <?php
-
-//session_start();
 
 if (empty($_SESSION['csrf'])) {
 	if (function_exists('random_bytes')) {
@@ -38,17 +32,10 @@ if (empty($_SESSION['csrf'])) {
 	}
 }
 
-/**
- * Escapes HTML for output
- *
- */
 
 function escape($html) {
     return htmlspecialchars($html, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8");
 }
-
-
-
 
 
 ```
@@ -162,6 +149,12 @@ echo date('F d, Y', strtotime($data));
 
 ```
 
+**SQL Query:**
+```SQL
+"SELECT * FROM patient $where ORDER BY facility ASC"
+```
+
+
 The dropdown boxes for the filter loops through the values in either the 'Facility' or 'Provider' tables. Thus we are able to select from values that actually exist within the database, and we also do not have to manually update the filters if we add more values.
 
 ```php
@@ -186,6 +179,10 @@ The dropdown boxes for the filter loops through the values in either the 'Facili
 
 ```
 
+**SQL Query:**
+```SQL
+"SELECT name FROM facility GROUP BY name;"
+```
 
 ```PHP
 <?php
@@ -208,6 +205,10 @@ The dropdown boxes for the filter loops through the values in either the 'Facili
 
 ```
 
+**SQL Query:**
+```SQL
+"SELECT lastname FROM providers GROUP BY lastname;"
+```
 
 Similarly, a user can use multiple filters at once, simply by selecting other criteria.
 
@@ -222,6 +223,7 @@ Additionally, practice managers can gain information relating to all practice wi
 ## Reschedule
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329221241.png?raw=true)
 
+We use ```foreach``` to loop through all the database rows that match our filter.
 ```php
 <table class="table shadow-soft rounded" id="myTable">
     <thead>
@@ -272,16 +274,6 @@ One of the more powerful functions contained within the web application is the r
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329215349.png?raw=true)
 
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329215423.png?raw=true)
-
-Above, two patients have been assigned the provider 'Zarak' and are scheduled to be seen on March 31.
-
-![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329215505.png?raw=true)
-
-If 'Zarak' was not available for the date of the appoint, the patient can be assigned a different provider.
-
-![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329215615.png?raw=true)
-![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329215659.png?raw=true)
-
 
 ```php
 
@@ -341,6 +333,27 @@ try {
 ?>
 ```
 
+Above, two patients have been assigned the provider 'Zarak' and are scheduled to be seen on March 31.
+
+![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329215505.png?raw=true)
+
+If 'Zarak' was not available for the date of the appoint, the patient can be assigned a different provider.
+
+![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329215615.png?raw=true)
+
+**SQL Query: Update date**
+```SQL
+"UPDATE patient SET data='$data' WHERE id='$check'"
+```
+
+**SQL Query: Update Provider**
+```SQL
+"UPDATE patient SET prac='$prac' WHERE id='$check'"
+```
+
+When the update is successful, we are alerted.
+![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329215659.png?raw=true)
+
 ```php
 <?php if ($success){
    foreach($_POST['check'] as $check) {?>
@@ -360,6 +373,7 @@ try {
 
 ```
 
+
 ## Add Patient
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329221326.png?raw=true)
 
@@ -371,11 +385,63 @@ If we look at the results of our reschedule function, we can see that the values
 
 We can add patient 'Chris Godwin' to be scheduled for 'March 31, 2022.' When we go on the dashboard page, we will see 'Chris Godwin' along with the other patients that have been scheduled for 'March 31, 2022.'
 
+```PHP
+<?php
+
+/**
+ * Use an HTML form to create a new entry in the
+ * users table.
+ *
+ */
+
+require "config.php";
+require "common.php";
+
+if (isset($_POST['submit'])) {
+  if (!hash_equals($_SESSION['csrf'], $_POST['csrf'])) die();
+
+  try  {
+    $connection = new PDO($dsn, $username, $password, $options);
+
+    $new_user = array(
+      "firstname" => $_POST['firstname'],
+      "lastname"  => $_POST['lastname'],
+      "rmnum"     => $_POST['rmnum'],
+      "facility"   => $_POST['facility'],
+      "chiefcomp"  => $_POST['chiefcomp'],
+      "prac"     => $_POST['prac'],
+      "data"       => $_POST['data']
+
+    );
+
+    $sql = sprintf(
+      "INSERT INTO %s (%s) values (%s)",
+      "patient",
+      implode(", ", array_keys($new_user)),
+      ":" . implode(", :", array_keys($new_user))
+    );
+
+    $statement = $connection->prepare($sql);
+    $statement->execute($new_user);
+  } catch(PDOException $error) {
+      echo $sql . "<br>" . $error->getMessage();
+  }
+}
+?>
+
+```
+
+
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329220422.png?raw=true)
 
 We can check the 'Patient' table, and see that 'Chris Godwin' has been added.
 
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329220522.png?raw=true)
+**SQL Query:**
+```SQL
+"INSERT INTO %s (%s) values (%s)","patient",
+```
+
 
 ## Add Facility
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329221403.png?raw=true)
@@ -419,6 +485,10 @@ if (isset($_POST['submit'])) {
 
 ```
 
+**SQL Query: Add Patient to Table**
+```SQL
+"INSERT INTO %s (%s) values (%s)","facility",
+```
 
 Another 'Create' function. A user can fill out the form and they will be able to add another facility to the facility database.
 
@@ -480,6 +550,11 @@ We can update the table 'Providers' on the 'Add a Provider' page, and filling ou
 And we can see that the 'Providers' table has been updated to reflect the new information.
 
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329220851.png?raw=true)
+**SQL Query:**
+```SQL
+"INSERT INTO %s (%s) values (%s)","providers"
+```
+
 
 ## Edit Patient
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329221444.png?raw=true)
@@ -639,7 +714,18 @@ if (isset($_GET['id'])) {
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329221955.png?raw=true)
 
 
-
+**SQL Query:**
+```SQL
+"UPDATE patient
+            SET id = :id,
+              firstname = :firstname,
+              lastname = :lastname,
+              rmnum = :rmnum,
+              facility = :facility,
+              chiefcomp = :chiefcomp,
+              prac = :prac
+            WHERE id = :id"
+```
 
 ## Delete Patient
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329222053.png?raw=true)
@@ -700,6 +786,11 @@ try {
 
 
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329222536.png?raw=true)
+
+**SQL Query:**
+```SQL
+"DELETE FROM patient WHERE id = :id"
+```
 
 ## User Accounts
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329222654.png?raw=true)
