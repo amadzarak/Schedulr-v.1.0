@@ -37,7 +37,7 @@ One of the more powerful functions contained within the web application is the r
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329215423.png?raw=true)
 Above, two patients have been assigned the provider 'Zarak' and are scheduled to be seen on March 31.
 
-![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image 20220329215505.png?raw=true)
+![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329215505.png?raw=true)
 
 If 'Zarak' was not available for the date of the appoint, the patient can be assigned a different provider.
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329215615.png?raw=true)
@@ -85,7 +85,7 @@ And we can see that the 'Providers' table has been updated to reflect the new in
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329221444.png?raw=true)
 
 The 'Edit Patient' page allows users to correct any mistakes that may have occurred when originally entering the patient information. For example, assume that a patient has been assigned to wrong facility. The edit page allows a user to fix that.
-![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted image 20220329221605.png?raw=true)
+![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329221605.png?raw=true)
 
 We can see that 'Tom Brady' and 'Rob Gronkowski' have been assigned to the wrong facility. While they are originally located at 'New England Patriots' their facility now needs to be updated to 'Tampa Bay Buccaneers'.
 
