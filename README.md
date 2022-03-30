@@ -3,9 +3,11 @@ Schedulr is a CRUD web-app that is based on PHP. The following documentation wil
 ## Dashboard
 
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329221154.png?raw=true)
+
 When a user first logins into the system they are presented with the dashboard screen. On the dashboard screen the user can perform various actions relating to practice management.
 
 In order to protect patient privacy, all screenshots will use names related to the NFL.
+
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329214153.png?raw=true)
 
 The main purpose of the dashboard for for report generation. A user can filter their reports in three main ways:
@@ -17,6 +19,7 @@ By default the dashboard reports all activities for the current date.
 
 ### Filters
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329214245.png?raw=true)
+
 All patients that are listed under 'New England Patriots' will appear. Simply by selecting the dropdown, a user can filter by the name of the facility.
 A user can add more facilities to the database by entering the 'Add Facility' page.
 
@@ -24,22 +27,27 @@ Similarly, a user can use multiple filters at once, simply by selecting other cr
 
 ### Generating Reports
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329214903.png?raw=true)
+
 By using the filters on the dashboard, a user can generate reports in the form of a pdf. This allows for easy sharing of information. For example, a provider can have easy access to their schedule, and where the patients they need to visit are, within the facility.
 
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329215030.png?raw=true)
+
 Additionally, practice managers can gain information relating to all practice wide activities, and gain insight on provider productivity. 
 ## Reschedule
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329221241.png?raw=true)
+
 One of the more powerful functions contained within the web application is the rescheduling page. On this page a user can batch select multiple patients and reschedule them. Additionally, a user can make updates to the schedule by changing the provider assigned or changing the date of the appointment.
 
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329215349.png?raw=true)
 
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329215423.png?raw=true)
+
 Above, two patients have been assigned the provider 'Zarak' and are scheduled to be seen on March 31.
 
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329215505.png?raw=true)
 
 If 'Zarak' was not available for the date of the appoint, the patient can be assigned a different provider.
+
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329215615.png?raw=true)
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329215659.png?raw=true)
 
@@ -58,9 +66,12 @@ We can add patient 'Chris Godwin' to be scheduled for 'March 31, 2022.' When we 
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329220422.png?raw=true)
 
 We can check the 'Patient' table, and see that 'Chris Godwin' has been added.
+
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329220522.png?raw=true)
+
 ## Add Facility
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329221403.png?raw=true)
+
 Another 'Create' function. A user can fill out the form and they will be able to add another facility to the facility database.
 
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329215818.png?raw=true)
@@ -80,7 +91,9 @@ We can update the table 'Providers' on the 'Add a Provider' page, and filling ou
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329220831.png?raw=true)
 
 And we can see that the 'Providers' table has been updated to reflect the new information.
+
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329220851.png?raw=true)
+
 ## Edit Patient
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329221444.png?raw=true)
 
@@ -105,6 +118,7 @@ Users can edit other aspects of the patient's profile on the edit page too. And 
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329222053.png?raw=true)
 
 As the final feature in a 'CRUD' program, the 'Delete Patient' page allows users to remove patients from the database.
+
 ![](https://github.com/amadzarak/Schedulr-v.1.0/blob/main/images/Pasted%20image%2020220329222414.png?raw=true)
 
 After hitting the 'Delete' button, the user will receive an alert asking to confirm their selection.
