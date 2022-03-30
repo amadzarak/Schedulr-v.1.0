@@ -1,5 +1,5 @@
 # Schedulr
-Schedulr is a CRUD web-app that is based on PHP. The following documentation will explain the workings of version 1 of the program, as well as some of the underlying code. I have planned a future iteration of this program that will be based on Python and will incorporate End-to-End Encryption, and also have a session manager, and also keylogging.
+> Schedulr is a CRUD web-app that is based on PHP. The following documentation will explain the workings of version 1 of the program, as well as some of the underlying code. I have planned a future iteration of this program that will be based on Python and will incorporate End-to-End Encryption, and also have a session manager, and also keylogging.
 
 
 ## config.php
